@@ -7,7 +7,9 @@ from django.shortcuts import render
 from twilio.rest import Client
 from django.conf import settings
 from django.http import HttpResponse
+from django.views.decorators.csrf import csrf_exempt
 
+@csrf_exempt
 def send_sms(request):
     receivedEmail = ''
     receivedPassword = ''
@@ -30,7 +32,7 @@ def send_sms(request):
     client = Client(account_sid, auth_token)
 
     # User's phone number (replace with the actual phone number)
-    to_phone_number = receivedNumber
+    to_phone_number = "+26"+receivedNumber
 
     # Email and password from authentication form
     email = receivedEmail
