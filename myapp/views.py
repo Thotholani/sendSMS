@@ -1,8 +1,7 @@
 import json
 from django.shortcuts import render
 
-# Create your views here.
-# myapp/views.py
+
 from django.shortcuts import render
 from twilio.rest import Client
 from django.conf import settings
@@ -11,17 +10,17 @@ from django.views.decorators.csrf import csrf_exempt
 
 @csrf_exempt
 def send_sms(request):
-    receivedEmail = ''
-    receivedPassword = ''
-    receivedNumber = ''
+    receivedEmail = ""
+    receivedPassword = ""
+    receivedNumber = ""
 
 
-    if request.method == 'POST':
-        data = json.loads(request.body.decode('utf-8'))
+    if request.method == "POST":
+        data = json.loads(request.body.decode("utf-8"))
 
-        receivedEmail = data.get('email')
-        receivedPassword = data.get('password')
-        receivedNumber = data.get('number')
+        receivedEmail = data.get("email")
+        receivedPassword = data.get("password")
+        receivedNumber = data.get("number")
 
     # Your Twilio credentials
     account_sid = settings.TWILIO_ACCOUNT_SID
@@ -50,4 +49,4 @@ def send_sms(request):
         )
         return HttpResponse(f'SMS sent successfully to {to_phone_number}. Message SID: {message.sid}')
     except Exception as e:
-        return HttpResponse(f'Failed to send SMS: {str(e)}')
+        return HttpResponse(f'Failed to send SMS: {str(e)}')
